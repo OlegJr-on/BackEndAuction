@@ -1,0 +1,96 @@
+﻿@model Web_API.Controllers.WrapperLot;
+@using BLL.Models;
+
+@{
+    ViewData["Title"] = @Model._lot.Title;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/AuctionStyle.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="photo-slider">
+
+        @{
+            int i = 1;
+        }
+        @foreach (var item in @Model._photos)
+        {
+
+            <img class="mySlides" src="@item.PhotoSrc" style="width:40%">
+
+            i++;
+        }
+        <button class="button-black-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="button-black-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+    </div>
+
+    <div class="lot-description">
+
+        <table>
+
+            <tr>
+                <td><h3>@Model._lot.Title</h3></td>
+            </tr>
+            <tr>
+                <td>Price Now:</td>
+                <td> <b>$ @Model._lot.CurrentPrice</b></td>
+            </tr>
+            <tr>
+                <td>Start price:</td>
+                <td> <b>$ @Model._lot.StartPrice</b></td>
+            </tr>
+            <tr>
+                <td>Minimum rate: </td>
+                <td> <b>@Model._lot.MinRate $</b></td>
+            </tr>
+            <tr>
+                <td><h4>Period:</h4></td>
+            </tr>
+            <tr>
+                <td>Start: </td>
+                <td> <b>@Model._lot.StartDate</b></td>
+            </tr>
+            <tr>
+                <td>End: </td>
+                <td> <b>@Model._lot.EndDate </b></td>
+            </tr>
+            <tr>
+                <td>Status lot:</td> <td> <b>@Model._lot.Status </b></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <script>
+
+
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+
+    </script>
+
+</body>
+</html>

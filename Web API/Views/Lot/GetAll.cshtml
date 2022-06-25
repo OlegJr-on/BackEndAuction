@@ -1,0 +1,61 @@
+﻿@model Web_API.Controllers.WrapperLot;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Auction";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Lot List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/AuctionStyle.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h2>Sales list</h2>
+    <h3> -> <a style="text-align:right; color:orangered" asp-action="regLot" asp-controller="lot">Add lot </a></h3>
+    <div class="lot-auction">
+
+        <table class="table-auction">
+
+            <tr>
+                <th>Img</th>
+                <th>Lot №</th>
+                <th style="margin-left:10px">Title</th>
+                <th>Start price </th>
+                <th>Status</th>
+                <th>Start date</th>
+                <th>End date</th>
+            </tr>
+
+            @foreach (var item in @Model._lots)
+            {
+                <tr>
+                    <td>
+                        @foreach (var photo in Model._photos.Where(x => x.Id == item.PhotoId))
+                        {
+                           <a href="getById/@item.Id"> <img height="45" width="55" src="@photo.PhotoSrc"> </a>
+                        }
+                    </td>
+                    <td>@item.Id</td>
+                    <td><a href="getById/@item.Id"> @item.Title </a></td>
+                    <td>$ @item.StartPrice</td>
+                    <td>@item.Status</td>
+                    <td>@item.StartDate</td>
+                    <td>@item.EndDate</td>
+                </tr>
+                @*<p>Price: @item.CurrentPrice $</p>*@
+
+            }
+        </table>
+
+
+
+    </div>
+
+</body>
+</html>

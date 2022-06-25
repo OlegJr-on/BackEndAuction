@@ -1,0 +1,42 @@
+﻿@model BLL.Models.LotModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "RegLot";
+}
+
+<h1>Add Lot</h1>
+
+<div class="reg-form">
+
+    @*@using (Html.BeginForm())
+    {
+        <p>Title: @Html.TextBoxFor(x=>x.Title)</p>
+        <p>Start price: @Html.TextBoxFor(x=>x.StartPrice) $</p>
+        <p>Rate: @Html.TextBoxFor(x =>x.MinRate)</p>
+
+
+        <input class="ButtonSubs" type="submit" value="Add" />
+    }*@
+
+
+    <form method="post" action="Add">
+
+        <label>Title</label>
+        <input name="Title"/> 
+        <br/>
+        
+        <label>Start price</label>
+        <input name="StartPrice"/>
+        <br/>
+        
+        <label>Rate</label>
+        <input name="MinRate"/>
+        <br/>
+
+        <button type="submit">Add Lot</button>
+
+    </form>
+
+</div>
+

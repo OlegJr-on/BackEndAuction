@@ -1,0 +1,28 @@
+﻿@model UserRegistrationModel;
+
+@{
+    ViewData["Title"] = "SignIn";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+</head>
+<body>
+
+    <div class="signIn-form">
+
+        <h2>Sign In</h2>
+
+        @using (Html.BeginForm())
+        {
+            <p>Email<br />@Html.TextBoxFor(x =>x.Email)</p>
+            <p>Password<br /> @Html.PasswordFor(x=>x.Password)</p>
+
+            <input class="btn-singIn" type="submit" value="Sign In" />
+        }
+    </div>
+
+
+</body>
+</html>

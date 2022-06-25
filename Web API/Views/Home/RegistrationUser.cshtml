@@ -1,0 +1,87 @@
+﻿@model Web_API.Models.UserRegistrationModel;
+
+@{
+    ViewData["Title"] = "Registration ";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div class="reg-form">
+
+        <form asp-action="RegistrationUser" asp-controller="home" method="post">
+
+            <div class="form-region">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="Surname"></label>
+                <input asp-for="Surname" />
+                <span asp-validation-for="Surname"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="Location"></label>
+                <input asp-for="Location" />
+                <span asp-validation-for="Location"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" />
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" />
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+
+            <div class="form-region">
+                <label asp-for="IsAgree"></label>
+                <input asp-for="IsAgree" />
+                <span asp-validation-for="IsAgree"></span>
+            </div>
+
+
+            <input type="submit" value="Registration" class="ButtonSubs" />
+
+
+        </form>
+
+        @* @using (Html.BeginForm())
+        {
+        <p>Name: @Html.TextBoxFor(x=>x.Name)</p>
+        <p>Surname: @Html.TextBoxFor(x=>x.Surname)</p>
+        <p>Location: @Html.TextBoxFor(x=>x.Location)</p>
+        <p>Number of phone: @Html.TextBoxFor(x=>x.PhoneNumber)</p>
+        <p>Email: @Html.TextBoxFor(x =>x.Email)</p>
+        <p>Password: @Html.PasswordFor(x=>x.Password)</p>
+        <p>ConfirmPassword: @Html.PasswordFor(x=>x.ConfirmPassword)</p>
+
+        <p>Do you agree the terms of agreement of our site
+        <br/>IsAgree? @Html.CheckBoxFor(x=>x.IsAgree)</p>
+
+        <input class="ButtonSubs" type="submit" value="Registration" />
+        }*@
+    </div>
+
+</body>
+</html>

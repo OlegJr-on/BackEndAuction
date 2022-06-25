@@ -1,0 +1,43 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/car_icon_145832.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <a asp-controller="home" asp-action="HomePage">Home</a>
+        <a asp-controller="lot" asp-action="getAll">Auction</a>
+        <a asp-controller="home" asp-action="About">About</a>
+        <a asp-controller="home" asp-action="RegistrationUser">Registration</a>
+        <a asp-controller="home" asp-action="SignIn">Sign In</a>
+        <a> <img class="user-ico" src="~/img/user_icon-icons.com_57997.svg"> </a>
+        <a> <img class="basket-ico" src="~/img/basket_78591.svg"> </a>
+    </header>
+
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    @if (IsSectionDefined("Footer"))
+    {
+        @RenderSection("Footer")
+    }
+    else
+    {
+        <footer>
+            <h4> Oleh Mandra Company | Cssauthor.com © 2014 All Rights Reserved</h4>
+        </footer>
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

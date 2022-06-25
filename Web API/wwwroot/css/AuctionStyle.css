@@ -1,0 +1,80 @@
+﻿
+.lot-auction {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin: 30px 20px;
+    text-align: center;
+}
+
+.table-auction {
+    margin: 40px;
+    margin-bottom: 80px;
+    background-color: grey;
+    width: 80%;
+    align-self: center;
+}
+
+    .table-auction tr,
+    .table-auction th,
+    .table-auction td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .table-auction a {
+        text-decoration: none;
+        color: darkseagreen;
+    }
+
+        .table-auction a:hover {
+            color: darkblue;
+        }
+
+.lot-description {
+    /*text-align:right;*/
+    margin: 0px 30px 150px 50px;
+    background-color: dimgrey;
+    width: 40%;
+}
+
+.lot-description table td {
+    border: 1px solid black;
+}
+
+.photo-slider {
+    margin: 50px;
+}
+
+.button-black-display-left,
+.button-black-display-right {
+    cursor: pointer;
+    width: auto;
+    padding: 10px;
+    margin-top: -22px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s ease;
+    user-select: none;
+}
+
+
+    .button-black-display-left:hover,
+    .button-black-display-right:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+@media only screen and (max-width: 300px) {
+    .button-black-display-left:hover,
+    .button-black-display-right:hover {
+        font-size: 11px
+    }
+}
+
+.photo-slider img{
+    border: 5px solid black;
+}
