@@ -112,7 +112,7 @@ namespace AuctionTests
         }
     }
 
-    internal class ProductModelEqualityComparer : IEqualityComparer<LotModel>
+    internal class LotModelEqualityComparer : IEqualityComparer<LotModel>
     {
         public bool Equals([AllowNull] LotModel x, [AllowNull] LotModel y)
         {
