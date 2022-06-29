@@ -17,6 +17,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
 using System;
 
 namespace Web_API
@@ -32,6 +33,19 @@ namespace Web_API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //Enable CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
+            //JSON Serializer
+            services.AddControllersWithViews().AddNewtonsoftJson(options => 
+                                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                                .AddNewtonsoftJson(options =>
+                                            options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+            //Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuctionAPI", Version = "v1" });
@@ -40,7 +54,6 @@ namespace Web_API
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddCors();
 
             services.AddDbContext<AuctionDbContext>(options =>
               options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AuctionDbTest;Trusted_Connection=True;"));
@@ -63,6 +76,8 @@ namespace Web_API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Enable CORS
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseCors(options =>
             options.WithOrigins("https://localhost:44331/")

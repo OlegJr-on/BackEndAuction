@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Web_API.Controllers
 {
@@ -13,10 +16,13 @@ namespace Web_API.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        //private readonly IConfiguration _configuration;
+
         private readonly IOrderService _orderService;
-        public OrderController(IOrderService orderService)
+        public OrderController(IConfiguration configuration, IOrderService orderService)
         {
             _orderService = orderService;
+            //_configuration = configuration;
         }
 
         /// <summary>
@@ -98,6 +104,8 @@ namespace Web_API.Controllers
 
             if (od == null)
                 return NotFound();
+
+            //var OrderDetailResult = od.Select(x=>x.Name).
 
             return Ok(od);
         }

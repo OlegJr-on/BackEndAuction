@@ -1,5 +1,4 @@
 ﻿
-
 namespace DAL.Entities
 {
     public enum LotStatus
