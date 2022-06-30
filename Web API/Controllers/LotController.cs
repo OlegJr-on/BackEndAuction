@@ -140,7 +140,7 @@ namespace Web_API.Controllers
         /// <remarks>
         /// Sample request
         /// 
-        ///     GET api/lot/GetPhotoInGroup
+        ///     GET api/lot/GetPhotoInGroup/id
         /// 
         /// </remarks>
         /// <returns> A list of lot photos</returns>

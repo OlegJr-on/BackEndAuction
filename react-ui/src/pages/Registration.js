@@ -15,8 +15,8 @@ export class Registration extends Component{
         fetch(variables.API_URL+'user/add',{
             method: 'POST',
             headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
+                'Accept':' */*',
+                'Content-Type':'application/json-patch+json'
             },
             body: JSON.stringify({
                 Name:this.state.Name
@@ -64,11 +64,11 @@ export class Registration extends Component{
                     <label for="email"><b>Email</b></label>
                     <input type="text" placeholder="Enter Email" name="email" required/>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required/>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required/>
 
-                    <label for="psw-repeat"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" name="psw-repeat" required/>
+                    <label for="ConfirmPassword"><b>Confirm Password</b></label>
+                    <input type="password" placeholder="Confirm Password" name="confirmPassword" required/>
                     <hr/>
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 

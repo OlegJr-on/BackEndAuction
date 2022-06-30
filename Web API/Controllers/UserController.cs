@@ -26,33 +26,6 @@ namespace Web_API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public JsonResult GetAll()
-        {
-
-            string query = @"SELECT id,Name,Surname,AccessLevel
-                             FROM dbo.Users AS users
-                             JOIN [Role] AS r 
-                             ON r.id = users.AccessLevel";
-
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("AppCon");
-            SqlDataReader myReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query,connection))
-                {
-                    myReader = command.ExecuteReader();
-                    table.Load(myReader);
-                    myReader.Close();
-                    connection.Close();
-                }
-            }
-
-            return new JsonResult(table);
-        }
-
 
         /// <summary>
         /// Get All users

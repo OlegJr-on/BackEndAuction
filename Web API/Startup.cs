@@ -100,6 +100,9 @@ namespace Web_API
                 endpoints.MapControllers();
             });
 
+
+            //-----------------------------------------------
+            //-----------------------------------------------
             //if (env.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();

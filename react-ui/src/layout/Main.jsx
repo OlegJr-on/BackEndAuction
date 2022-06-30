@@ -1,15 +1,27 @@
 import React from 'react';
-import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import {Route,Routes,Navigate} from 'react-router-dom'
 import {Auction} from "../pages/Auction";
 import {About} from "../pages/About";
 import { Home } from "../pages/Home";
-import {Rou} from "../layout/Header"
+import { Registration } from "../pages/Registration";
+import { SignIn } from "../pages/SignIn";
+import {Lot} from '../pages/Lot';
+import { NotFound } from '../pages/NotFound';
 
 function Main(){
     return (
-        <main className="container content">
-            
-    </main>
+            <main className="container content">
+                <Routes>
+                    <Route path='/Auction' element={<Auction />}/>
+                    <Route path='/Auction/:lotId' element={<Lot/>}/>
+                    <Route path='/About' element={<About/>}/>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/Home' element={<Home/>}/>
+                    <Route path='/Registration' element={<Registration/>}/>
+                    <Route path='/SignIn' element={<SignIn/>}/>
+                    <Route path="*" element={ <NotFound/>} />
+                </Routes>
+            </main>
     )
 }
 
