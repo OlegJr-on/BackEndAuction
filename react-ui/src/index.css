@@ -65,6 +65,7 @@ nav ul{
   padding: 5px;
 }
 
+
 .home-page {
   width:40%;
   text-align: left;
@@ -80,7 +81,6 @@ nav ul{
 }
 
 
-
 .container{
   min-height: calc(100vh- 64px -190px);
 }
@@ -92,27 +92,6 @@ footer {
   height:190px;
   width:100%;
 }
-
-/* Photo Slider */
-.photo-slider{
-  display: flex;
-  flex-direction: row;
-}
-
-.photo-slider p{
-  align-self: flex-end;
-}
-
-.w3-content{
-  margin: 100px 0 150px 0;
-}
-.w3-content img{
-  width: 80%;
-  height: 70%;
-}
-.mySlides {display:none}
-.w3-left, .w3-right, .w3-badge {cursor:pointer}
-.w3-badge {height:13px;width:13px;padding:0}
 
 
 .NotFoundPage-fragment{
@@ -231,3 +210,4 @@ a {
     padding:50px 20px;
   }
 }
+

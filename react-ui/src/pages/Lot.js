@@ -28,24 +28,14 @@ export function Lot(){
 
     return(
         <div className="lot-description">
-
-            {/* <div className="w3-content w3-display-container">
-            {
-                photo.map(photo => 
-                <div key= {photo.Id}>
-                    <img className="mySlides" src={photo.PhotoSrc}/> 
-                 </div>)
-            }
-                <button className="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                <button className="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-            </div> */}
-            <div classNameName='photo-slider'>
+           
+            <div className='photos'>
                 {
-
                     photo.map(photo => 
-                    <p key= {photo.Id}>
-                       <img height="350" width="500" src={photo.PhotoSrc}/> 
-                    </p>)
+                        <p key= {photo.Id}>
+                            <img height="350" width="500" src={photo.PhotoSrc}/>
+                        </p>
+                    )
                 }
             </div>
 
@@ -69,7 +59,7 @@ export function Lot(){
                     <tr>
                         <td>Status lot:</td> <td>
                              <b>
-                                {lot.Status == 1 ? "lot" : "lotbid"}
+                                {lot.Status}
                              </b>
                         </td>
                     </tr>
@@ -87,5 +77,6 @@ export function Lot(){
 
                 </table>
              </div>
+             
         ) 
 }
