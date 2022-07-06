@@ -151,6 +151,10 @@ hr {
   opacity: 1;
 }
 
+.form-group label{
+  color: gray;
+}
+
 /* Add a blue text color to links */
 a {
   color: dodgerblue;

@@ -17,7 +17,7 @@ function Header(){
                             <NavLink className="btn grey darken-2" to="/About" >
                                 About
                             </NavLink>
-                            <NavLink className="btn grey darken-2" to="/Registration" >
+                            <NavLink className="btn grey darken-2" to="/Registration"> 
                                 Registration
                             </NavLink>
                             <NavLink className="btn grey darken-2" to="/SignIn" >

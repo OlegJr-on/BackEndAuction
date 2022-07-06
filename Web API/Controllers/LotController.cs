@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Web_API.Controllers
 {
-    [Route("api/lot/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LotController : ControllerBase
     {

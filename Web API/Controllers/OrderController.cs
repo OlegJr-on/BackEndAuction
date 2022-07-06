@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Web_API.Controllers
 {
-    [Route("api/order/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderController : ControllerBase
     {

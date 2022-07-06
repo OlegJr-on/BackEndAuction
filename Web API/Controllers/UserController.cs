@@ -1,19 +1,21 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-
+using Web_API.Models;
+using System.Security.Claims;
+using DAL.Entities;
 
 namespace Web_API.Controllers
 {
-    [Route("api/user/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -26,6 +28,32 @@ namespace Web_API.Controllers
             _configuration = configuration;
         }
 
+        /// TEST AUTHORIZATION
+        
+
+
+        private UserDTO GetCurrentUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+
+                return new UserDTO
+                {
+                    //Id = userClaims.FirstOrDefault(n=> n.Type == ClaimTypes.)
+                    Name = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.NameIdentifier)?.Value,
+                    Surname = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Surname)?.Value,
+                    Location = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Locality)?.Value,
+                    Email = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value,
+                    PhoneNumber = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.HomePhone)?.Value,
+                    AccessLevel = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Role)?.Value,
+                };
+            }
+            return null;
+        }
+        ///
 
         /// <summary>
         /// Get All users
@@ -39,12 +67,14 @@ namespace Web_API.Controllers
         /// <returns> A list of existed users</returns>
         /// <response code="200" >Success</response>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // Bad Request
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
-        public async Task<ActionResult<IEnumerable<UserModel>>> Get()
+        public async Task<ActionResult<IEnumerable<BLL.Models.UserModel>>> Get()
         {
-            IEnumerable<UserModel> users = null;
+            //var user = GetCurrentUser();
+            IEnumerable<BLL.Models.UserModel> users = null;
             try
             {
                 users = await _userService.GetAllAsync();
@@ -76,7 +106,7 @@ namespace Web_API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
-        public async Task<ActionResult<UserModel>> GetById(int id)
+        public async Task<ActionResult<BLL.Models.UserModel>> GetById(int id)
         {
             var model = await _userService.GetByIdAsync(id);
 
@@ -99,7 +129,7 @@ namespace Web_API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
-        public async Task<ActionResult<UserModel>> GetByLotId(int id)
+        public async Task<ActionResult<BLL.Models.UserModel>> GetByLotId(int id)
         {
             var users = await _userService.GetUsersByLotIdAsync(id);
 
@@ -124,7 +154,7 @@ namespace Web_API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // Bad Request
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
-        public async Task<ActionResult> Add([FromBody] UserModel user)
+        public async Task<ActionResult> Add([FromBody] BLL.Models.UserModel user)
         {
             try
             {
@@ -148,7 +178,7 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> Updated user in database </returns>
         [HttpPut]
-        public async Task<ActionResult> Update([FromBody] UserModel value)
+        public async Task<ActionResult> Update([FromBody] BLL.Models.UserModel value)
         {
             try
             {

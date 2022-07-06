@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Web_API.Models
 {
     public class UserRegistrationModel
     {
+        #region UserRegistrationModel with Data Annotion
+
         public int Id { get; set; }
 
-        [Display(Name="Name")]
-        [Required(ErrorMessage ="Please enter your name")]
+        [Display(Name = "Name")]
+        [Required(ErrorMessage = "Please enter your name")]
         [StringLength(maximumLength: 25, MinimumLength = 3, ErrorMessage = "Name is too short")]
         public string Name { get; set; }
 
@@ -19,7 +22,7 @@ namespace Web_API.Models
 
         [Display(Name = "Location")]
         [Required(ErrorMessage = "Please enter your location")]
-        [StringLength(25)] 
+        [StringLength(25)]
         [MinLength(3)]
         public string Location { get; set; }
 
@@ -40,8 +43,8 @@ namespace Web_API.Models
         [Display(Name = "Password")]
         [UIHint("Password")]
         [Required(ErrorMessage = "Please enter your password")]
-        [Compare("ConfirmPassword",ErrorMessage ="The entered password does not match")]
-        [StringLength(maximumLength: 20,MinimumLength = 6,ErrorMessage ="Your password does not fall within the range of 6 to 20 symbols")]
+        [Compare("ConfirmPassword", ErrorMessage = "The entered password does not match")]
+        [StringLength(maximumLength: 20, MinimumLength = 6, ErrorMessage = "Your password does not fall within the range of 6 to 20 symbols")]
         public string Password { get; set; }
 
 
@@ -51,8 +54,9 @@ namespace Web_API.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Do you agree with the terms of the agreement?")]
-        [Required(ErrorMessage ="Tap on checkbox")]
+        [Required(ErrorMessage = "Tap on checkbox")]
         public bool IsAgree { get; set; }
+        #endregion
 
     }
 

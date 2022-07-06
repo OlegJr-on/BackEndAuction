@@ -3,10 +3,11 @@ import {Route,Routes,Navigate} from 'react-router-dom'
 import {Auction} from "../pages/Auction";
 import {About} from "../pages/About";
 import { Home } from "../pages/Home";
-import Registration from "../pages/Registration";
+import {Registration} from "../pages/Registration";
 import { SignIn } from "../pages/SignIn";
 import {Lot} from '../pages/Lot';
 import { NotFound } from '../pages/NotFound';
+
 
 function Main(){
     return (

@@ -16,6 +16,10 @@ namespace BackEndConsole
     {
         static void Main(string[] args)
         {
+
+            Role role = Role.Admin;
+            Console.WriteLine(role.ToString());
+
             using (var db = new AuctionDbContext())
             {
 

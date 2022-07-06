@@ -31,7 +31,7 @@ namespace Web_API.Controllers
         }
         
         [HttpPost]
-        public IActionResult SignIn(UserRegistrationModel model)
+        public IActionResult SignIn(Models.UserRegistrationModel model)
         {
             if (string.IsNullOrEmpty(model.Email) && string.IsNullOrEmpty(model.Password))
             {
@@ -63,12 +63,12 @@ namespace Web_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegistrationUser(UserRegistrationModel userModel)
+        public IActionResult RegistrationUser(Models.UserRegistrationModel userModel)
         {
             if (ModelState.IsValid) {
-                if (userModel != null && userModel.IsAgree == true)
+                if (userModel != null /*&& userModel.IsAgree == true*/)
                 {
-                    var newUser = new UserModel
+                    var newUser = new BLL.Models.UserModel
                     {
                         Name = userModel.Name,
                         Surname = userModel.Surname,

@@ -2,12 +2,8 @@ import axios from 'axios'
 import { variables } from '../ApiEndPoints/Variables'
 
 
-export const registration = async (name,surname,location,phoneNumber,email,password,confirmPassword,accessLevel = 2 ) =>
+export const registration = async (name,surname,location,phoneNumber,email,password,accessLevel = 2 ) =>
 {
-    if(password != confirmPassword){
-        alert('Password don`t similar')
-    }
-
     try {
         const response = await axios.post(variables.API_URL+'user/add',{
             name,
@@ -18,9 +14,10 @@ export const registration = async (name,surname,location,phoneNumber,email,passw
             password,
             accessLevel      
         })
-
+        alert("Congradulations")
     }
     catch (e) {
         alert(e)
     }
+
 }
