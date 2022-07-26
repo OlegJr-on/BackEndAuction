@@ -98,14 +98,6 @@ namespace Web_API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //Enable CORS //обеспечивает поддержку кроссдоменных запросов
-            // CORS Розібратьмся з цима двома запросами 
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
-            app.UseCors(options =>
-            options.WithOrigins("https://localhost:44331/")
-            .AllowAnyMethod()
-            .AllowAnyHeader());
 
 
             if (env.IsDevelopment())
@@ -115,6 +107,8 @@ namespace Web_API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuctionAPI v1"));
             }
 
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -123,11 +117,20 @@ namespace Web_API
 
             app.UseAuthorization();
 
+            //Enable CORS //обеспечивает поддержку кроссдоменных запросов
+            // CORS Розібратьмся з цима двома запросами 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            //app.UseCors(options =>
+            //options.WithOrigins("https://localhost:44331/")
+            //.AllowAnyMethod()
+            //.AllowAnyHeader());
 
             // предоставляет механизм маршрутизации
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
 

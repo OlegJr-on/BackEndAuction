@@ -1,6 +1,7 @@
 import React,{ useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { variables } from '../ApiEndPoints/Variables';
+import {useSelector} from 'react-redux'
 
 
 export function Lot(){
@@ -9,6 +10,7 @@ export function Lot(){
     const lotId = params.lotId
     const [lot,setLot] = useState({})
     const [photo,setPhotos] = useState([])
+    const isAuth = useSelector(state => state.user.isAuth)
     
     function refreshList(){
         fetch(variables.API_URL+ 'lot/GetPhotoInGroup/' + lotId)
@@ -76,7 +78,17 @@ export function Lot(){
                     </tr>
 
                 </table>
-             </div>
+
+                <div className='buy-lot'>
+                    <div className='xz'>
+                        <label><h4>Your bid:</h4> <h6>*price must be higher than the current price + min rate</h6></label>
+                        <input type="text" className="form-control" name="bid"
+                        placeholder="$"
+                         />
+                    </div> 
+                    <a disabled ={!isAuth} className="waves-effect waves-light btn-large">Bid now</a>
+                </div>
+        </div>
              
         ) 
 }

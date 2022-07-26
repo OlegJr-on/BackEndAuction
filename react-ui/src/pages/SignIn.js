@@ -1,36 +1,40 @@
 import React,{Component,useState} from 'react';
-// import { Auth0Provider } from '@auth0/auth0-react'
-import { variables } from '../ApiEndPoints/Variables';
+import { login } from '../actions/user';
+import {useDispatch} from "react-redux";
+import { NavLink } from 'react-router-dom';
 
-// export class SignIn extends Component{
+
+
 export function SignIn(){
-
-    //render(){
-        const [email,setEmail] = useState('')
-        const [password,setPassword] = useState('')
-        
+    
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const dispatch = useDispatch()
+    
         return (
-            <div class="registration-cssave">
+            <div className="registration-cssave">
                 <form>
-                    <h3 class="text-center">Login</h3>
+                    <h3 className="text-center">Login</h3>
 
-                    <div class="form-group">
-                        <input value={email}  onChange={(e) => setEmail(e.target.value) } 
-                                class="form-control item" type="text" name="email" maxlength="50" minlength="4" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" id="email" placeholder="Email" required/>
+                    <div className="form-group">
+                        <input value={email} onChange={(e) => setEmail(e.target.value) } 
+                                className="form-control item" type="text" name="email" maxlength="50" minlength="4" pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" id="email" placeholder="Email" required/>
                     </div>
 
-                    <div class="form-group">
+                    <div className="form-group">
                         <input value={password}   onChange={(e) => setPassword   (e.target.value) } 
-                                class="form-control item" type="password" name="password" minlength="6" id="password" placeholder="Password" required/>
+                                className="form-control item" type="password" name="password" minlength="6" id="password" placeholder="Password" required/>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block create-account"
+                    <div className="form-group">
+                        <NavLink to="/" >
+                        <button className="btn btn-primary btn-block create-account"
                                  type="submit" 
-                                 disabled={!(!!(email)) || !(!!(password))}>Sign In</button>
+                                 disabled={!(!!(email)) || !(!!(password))}
+                                 onClick={() => dispatch(login(email, password))}  >Sign In</button>
+                        </NavLink>
                     </div>
                 </form>
             </div>
 
         )
 }
-

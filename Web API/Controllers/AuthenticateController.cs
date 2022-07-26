@@ -32,17 +32,29 @@ namespace Web_API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] UserLogin userLogin)
+        //public IActionResult Login([FromBody] UserLogin userLogin)
+        //{
+        //    var user = Authenticate(userLogin);
+
+        //    if (user != null)
+        //    {
+        //        var token = Generate(user);
+        //        return Ok(new Response(token,user));
+        //    }
+
+        //    return NotFound("User not found");
+        //}
+        public Response Login([FromBody] UserLogin userLogin)
         {
             var user = Authenticate(userLogin);
 
             if (user != null)
             {
                 var token = Generate(user);
-                return Ok(token);
+                return new Response(token,user);
             }
 
-            return NotFound("User not found");
+            return null;
         }
 
         private string Generate(UserModel user)
@@ -80,6 +92,17 @@ namespace Web_API.Controllers
             }
 
             return null;
+        }
+    }
+
+    public class Response
+    {
+        public readonly string token;
+        public UserModel User { get; set; }
+        public Response(string token, UserModel user)
+        {
+            this.token = token;
+            this.User = user;
         }
     }
     

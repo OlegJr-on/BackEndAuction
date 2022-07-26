@@ -32,7 +32,7 @@ namespace Web_API.Controllers
         
 
 
-        private UserDTO GetCurrentUser()
+        private UserDTO CurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
 
@@ -56,7 +56,50 @@ namespace Web_API.Controllers
         ///
 
         /// <summary>
-        /// Get All users
+        /// Get the current user
+        /// </summary>
+        /// <remarks>
+        /// Sample request
+        /// 
+        ///     GET api/user/GetCurrentUser
+        /// 
+        /// </remarks>
+        /// <returns> The current user who is authorized</returns>
+        /// <response code="200" >Success</response>
+        /// <response code="400" >Bad Request</response>
+        /// <response code="404" >Not Found</response>
+        /// <response code="401" >Not Authorizate</response>
+        /// <response code="403" >Don`t have access</response>
+        [HttpGet]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] // Bad Request
+        [ProducesResponseType(StatusCodes.Status200OK)] // Ok
+        public async Task<ActionResult<UserModel>> GetCurrentUser()
+        {
+            var Current_user = CurrentUser();
+            UserModel WantedUser = null;
+            try
+            {
+                var allUsers = await _userService.GetAllAsync();
+
+                WantedUser = allUsers.FirstOrDefault(x => x.Email == Current_user.Email);
+
+                if (WantedUser == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok(WantedUser);
+        }
+
+        /// <summary>
+        /// Get All users in system
         /// </summary>
         /// <remarks>
         /// Sample request
@@ -67,14 +110,13 @@ namespace Web_API.Controllers
         /// <returns> A list of existed users</returns>
         /// <response code="200" >Success</response>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // Bad Request
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
-        public async Task<ActionResult<IEnumerable<BLL.Models.UserModel>>> Get()
+        public async Task<ActionResult<IEnumerable<UserModel>>> Get()
         {
-            //var user = GetCurrentUser();
-            IEnumerable<BLL.Models.UserModel> users = null;
+            IEnumerable<UserModel> users = null;
             try
             {
                 users = await _userService.GetAllAsync();
@@ -88,7 +130,6 @@ namespace Web_API.Controllers
 
                 return BadRequest();
             }
-
 
             return Ok(users);
         }
@@ -104,6 +145,7 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> User with the desired id </returns>
         [HttpGet("{id}")]
+        //[Authorize/*(Roles = "Admin")*/]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
         public async Task<ActionResult<BLL.Models.UserModel>> GetById(int id)
@@ -127,6 +169,7 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> User with the desired lot id </returns>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
         public async Task<ActionResult<BLL.Models.UserModel>> GetByLotId(int id)
@@ -152,6 +195,7 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> Added user to database </returns>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // Bad Request
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
         public async Task<ActionResult> Add([FromBody] BLL.Models.UserModel user)
@@ -178,7 +222,8 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> Updated user in database </returns>
         [HttpPut]
-        public async Task<ActionResult> Update([FromBody] BLL.Models.UserModel value)
+        [Authorize]
+        public async Task<ActionResult> Update([FromBody] UserModel value)
         {
             try
             {
@@ -203,6 +248,7 @@ namespace Web_API.Controllers
         /// </remarks>
         /// <returns> Remoted user </returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status404NotFound)] // Not found
         [ProducesResponseType(StatusCodes.Status200OK)] // Ok
         public async Task<ActionResult> Delete(int id)
